@@ -1,7 +1,7 @@
 const app = Vue.createApp({
   data() {
     return {
-      counter: 0,
+      counter: 10,
       name: ''
     };
   },
@@ -11,7 +11,7 @@ const app = Vue.createApp({
       console.log('work')
     },
     reduce(num) {
-      if (this.counter > 0) {
+      if (this.counter-num > 0) {
         console.log('working')
         this.counter = this.counter - num
       } else {
