@@ -2,10 +2,18 @@ const app = Vue.createApp({
   data() {
     return {
       counter: 0,
-      name: ''
+      name: '',
+      confirm: ''
     };
   },
   methods: {
+    confirmInput(e) {
+      this.confirm = this.name
+    },
+    submit() {
+      console.log('can access')
+      console.log('loading...')
+    },
     add(num) {
       this.counter = this.counter + num
       console.log('work')
