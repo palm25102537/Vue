@@ -2,14 +2,21 @@ const app = Vue.createApp({
   data() {
     return {
       tasks: [],
-      task: ''
+      task: '',
+      isToggle: true,
     }
   },
   methods: {
     addTask() {
       if (this.task !== '') {
-        this.tasks.push(task)
+        this.tasks.push(this.task)
+        this.task = ''
       }
+    }
+  },
+  computed: {
+    toggle() {
+      return this.isToggle ? 'Hide List' : 'Show List'
     }
   }
 })
