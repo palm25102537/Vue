@@ -3,7 +3,7 @@
         <header>
           <h1>My Friends</h1>
         </header>
-        <new-friend/>
+        <new-friend @add-contact = "addContact"/>
     <ul>
         <friend-contact
           v-for="friend in friends"
@@ -14,6 +14,7 @@
           :is-favorite = "friend.isFavorite"
           @toggle-favorite = "toggleFavorite"
           :id = "friend.id"
+          @delete = "deleteContact"
         />
         <!-- <friend-contact
             name="Palm2"
@@ -59,7 +60,22 @@ export default  {
       toggleFavorite(friendId){
         const friend = this.friends.find((ele)=>ele.id === friendId)
         friend.isFavorite = !friend.isFavorite
+      },
+      addContact(name,phone,email){
+        const newFriend = {
+          id:new Date().toISOString(),
+          name,
+          phone,
+          email,
+          isFavorite:false
+        }
+        this.friends.push(newFriend)
+      },
+      deleteContact(friendId){
+        const idx = this.friends.findIndex((ele)=>ele.id === friendId)
+        this.friends.splice(idx,1)
       }
+
     }    
 }
 </script>

@@ -7,6 +7,7 @@
             <li><strong>Phone: {{phoneNumber}}</strong></li>
             <li><strong>Email: {{email}}</strong></li>
         </ul>
+        <button @click="deleteFriend(id)">Delete</button>
     </li>
 </template>
 
@@ -68,6 +69,9 @@ export default {
         toggleFav(){
             // this.isFriendFavorite = !this.isFriendFavorite
             this.$emit('toggle-favorite',this.id)
+        },
+        deleteFriend(){
+            this.$emit('delete',this.id)
         }
     },
     emits:{
@@ -78,7 +82,8 @@ export default {
                 console.warn('friend id is needed')
                 return false
             }
-        }
+        },
+        'delete':null
     }
 }
 </script>
