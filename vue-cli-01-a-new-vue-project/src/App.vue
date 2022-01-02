@@ -3,31 +3,38 @@
         <header>
           <h1>My Friends</h1>
         </header>
+        <new-friend/>
     <ul>
         <friend-contact
-            name="Palm"
-            phone-number="0123456"
-            email="plam@localhost.com"
-            is-favorite = "1"
+          v-for="friend in friends"
+          :key = "friend.id"
+          :name = "friend.name"
+          :phone-number= "friend.phone"
+          :email = "friend.email"
+          :is-favorite = "friend.isFavorite"
+          @toggle-favorite = "toggleFavorite"
+          :id = "friend.id"
         />
-        <friend-contact
+        <!-- <friend-contact
             name="Palm2"
             phone-number="0123456"
             email="plam2@localhost.com"
-            is-favorite = "0"
+            :is-favorite = true 
             />
         <friend-contact
             name="Palm3"
             phone-number="0123456"
             email="plam2@localhost.com"
-            is-favorite = "3a"
-            />
+            :is-favorite = false
+            /> -->
      </ul>
     </section>
 </template>
 
 <script>
+import NewFriend from './components/NewFriend.vue'
 export default  {
+  components: { NewFriend },
     data(){
         return {
             friends:[
@@ -35,16 +42,24 @@ export default  {
                 id:'manuel',
                 name:'Manuel Lorenz',
                 phone:'0123 45678 90',
-                email:'manuel@localhost.com'
+                email:'manuel@localhost.com',
+                isFavorite:true,
                 },
                 {
-                id:'Julie',
+                id:'julie',
                 name:'Julie Lorenz',
                 phone:'0123 45678 90',
-                email:'Julie@localhost.com'
+                email:'Julie@localhost.com',
+                isFavorite:false
                 }
             ]
         }
+    },
+    methods:{
+      toggleFavorite(friendId){
+        const friend = this.friends.find((ele)=>ele.id === friendId)
+        friend.isFavorite = !friend.isFavorite
+      }
     }    
 }
 </script>
@@ -112,5 +127,17 @@ header {
   border-color: #ec3169;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
 }
-
+#app input {
+  font: inherit;
+  padding: 0.15rem;
+}
+#app label {
+  font-weight: bold;
+  margin-right: 1rem;
+  width: 7rem;
+  display: inline-block;
+}
+#app form div {
+  margin: 1rem 0;
+}
 </style>

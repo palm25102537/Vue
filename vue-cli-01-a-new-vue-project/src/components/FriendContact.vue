@@ -1,11 +1,11 @@
 <template>
     <li>
-        <h2>{{name}} {{isFriendFavorite === '1'? '(Fav)': null}}</h2>
+        <h2>{{name}} {{isFavorite === true ? '(Fav)': null}}</h2>
         <button @click="toggleDetails">{{toggle? 'Hide Details':'Show Details'}}</button>
-        <button @click="toggleFav">{{isFriendFavorite === '1'? 'Unfav':'Fav'}}</button>
+        <button @click="toggleFav">{{isFavorite === true ? 'Unfav':'Fav'}}</button>
         <ul v-if="toggle">
             <li><strong>Phone: {{phoneNumber}}</strong></li>
-            <li><strong>Email:</strong></li>
+            <li><strong>Email: {{email}}</strong></li>
         </ul>
     </li>
 </template>
@@ -26,16 +26,20 @@ export default {
             required:true
             },
         isFavorite:{
-            type:String,
+            type:Boolean,
             required:false,
-            default:'0',
-            validator: function(val){
-                if(isNaN(val)){
-                    alert('error')
-                    return false
-                }
-                return val ==='1' || val === '0'
-            }
+            default:false,
+            // validator: function(val){
+            //     if(isNaN(val)){
+            //         alert('error')
+            //         return false
+            //     }
+            //     return val ==='1' || val === '0'
+            // }
+        },
+        id:{
+            type:String,
+            required:true
         }
     },
     // props:{
@@ -53,7 +57,7 @@ export default {
     data(){
         return {
             toggle:false,
-            isFriendFavorite:this.isFavorite
+            // isFriendFavorite:this.isFavorite
         }
         },
     methods:{
@@ -62,11 +66,18 @@ export default {
             //Vue translate phone-number to phoneNumber
         },
         toggleFav(){
-            if(this.isFriendFavorite === '1'){
-                    this.isFriendFavorite = '0'
-                }else if(this.isFriendFavorite === '0'){
-                    this.isFriendFavorite = '1'
-                    }  
+            // this.isFriendFavorite = !this.isFriendFavorite
+            this.$emit('toggle-favorite',this.id)
+        }
+    },
+    emits:{
+        'toggle-favorite':(id)=>{
+            if(id){
+                return true
+            }else{
+                console.warn('friend id is needed')
+                return false
+            }
         }
     }
 }
