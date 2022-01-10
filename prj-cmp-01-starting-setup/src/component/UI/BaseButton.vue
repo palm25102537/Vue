@@ -1,14 +1,12 @@
 <template>
-    <div>
-        <button :type="type" :class="mode">
-            <slot></slot>
-        </button>
-    </div>
+    <button :class="mode">
+      <slot></slot>
+    </button>
 </template>
 
 <script>
 export default {
-    props:['type','mode']
+    props:['mode']
 }
 </script>
 
@@ -20,6 +18,7 @@ button {
   border: 1px solid #3a0061;
   color: white;
   cursor: pointer;
+  font-size:24px;
 }
 
 button:hover,

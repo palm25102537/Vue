@@ -57,4 +57,6 @@ export default {
    background-color: transparent;
    cursor: pointer;
  }
+
+ 
 </style>

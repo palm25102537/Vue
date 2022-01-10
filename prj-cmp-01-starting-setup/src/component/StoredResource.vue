@@ -6,6 +6,7 @@
         :title="res.title"
         :desc="res.desc"
         :link = "res.link"
+        :id = "res.id"
          />
     </ul>
 </template>
@@ -14,9 +15,10 @@
 import LearningResource from './LearningResource.vue'
 export default{
     components:{
-        LearningResource
+        'learning-resource':LearningResource
     },
-    props:['resources']
+    inject:['resources']
+
 }
 </script>
 
